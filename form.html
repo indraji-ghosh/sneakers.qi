@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Delivery Address</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <div class="container">
+       <h2 style="color: #0084ff;">Delivery Address <i class="fas fa-shipping-fast" ></i></h2>
+
+       <form action="./final.html" id="form">
+
+        <div class="input-box">  <input type="text" required name="name">  <span>Name</span> </div>
+        <div class="input-box"><input type="text" required name="address1"><span>Address Line 1</span> </div>
+        <div class="input-box"><input type="text"  name="address2" required><span>Address Line 2</span></div>
+        <div class="input-box"><input type="text" required name="city"> <span>City</span> </div>
+        <div class="input-box"><input type="text" required name="state"> <span>State</span></div>
+        <div class="input-box"><input type="text" required name="pincode"> <span>Pin code</span></div>
+        <div class="input-box"><input type="text" required name="phonenumber"> <span>Phone number</span></div>
+
+        <button name="btn">Place Order</button>
+
+       </form>
+    </div>
+
+
+    <script>
+         
+         let url = 'https://script.google.com/macros/s/AKfycbz7nm4R3HefFODWet4e1Dk8KdN4qnsx9KfRlYTmpopxeWd69RJ62Or17hKfymx6ZH5yWg/exec';
+
+        let form = document.querySelector('#form');
+
+        form.addEventListener('submit', (e)=>{
+            e.target.btn.innerText = 'Placing Order..';
+            let d = new FormData(form);
+            e.preventDefault();
+
+            fetch(url, {
+                method:'post',
+                body:d,
+            }).then((res)=> res.text())
+            .then((finalres)=>{
+                e.target.btn.innerText='Order Placed'
+                console.log(finalres)
+                location.assign("./final.html")
+            })
+        })
+    </script>
+</body>
+</html>
